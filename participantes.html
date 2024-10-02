@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slider de Participantes</title>
+    <style>
+        body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-image: url(image.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.slider-container {
+    position: relative;
+    width: 80%;
+    max-width: 600px;
+    overflow: hidden;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background-color: #fff;
+}
+
+.slider {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+.slide {
+    min-width: 100%;
+    box-sizing: border-box;
+    padding: 20px;
+    text-align: center;
+}
+
+.slide img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+.prev, .next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 50%;
+    z-index: 1000;
+}
+
+.prev {
+    left: 10px;
+}
+
+.next {
+    right: 10px;
+}
+
+    </style>
+</head>
+<body>
+    <div class="slider-container">
+
+        <h1 style="text-align: center;">PARTICIPANTES:</h1>
+
+        <h2 style="text-align: center; text-decoration: underline;">Vota por tu favorito</h2>
+
+        <div class="slider">
+            <div class="slide">
+                <img src="image.png" alt="Participante 1">
+                <h2>Participante 1</h2>
+            </div>
+            <div class="slide">
+                <img src="participant2.jpg" alt="Participante 2">
+                <h2>Participante 2</h2>
+            </div>
+            <div class="slide">
+                <img src="participant3.jpg" alt="Participante 3">
+                <h2>Participante 3</h2>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+
+function showSlide(index) {
+    const slides = document.querySelectorAll('.slide');
+    if (index >= slides.length) {
+        currentSlide = 0;
+    } else if (index < 0) {
+        currentSlide = slides.length - 1;
+    } else {
+        currentSlide = index;
+    }
+    const slider = document.querySelector('.slider');
+    slider.style.transform = `translateX(-${currentSlide * 100}%)`;
+}
+
+function nextSlide() {
+    showSlide(currentSlide + 1);
+}
+
+function prevSlide() {
+    showSlide(currentSlide - 1);
+}
+
+// Auto slide every 5 seconds
+setInterval(() => {
+    nextSlide();
+}, 5000);
+
+document.addEventListener('DOMContentLoaded', () => {
+    showSlide(currentSlide);
+});
+
+    </script>
+</body>
+</html>
